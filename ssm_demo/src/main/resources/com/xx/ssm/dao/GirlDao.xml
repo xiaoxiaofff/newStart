@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xx.ssm.dao.GirlDao">
+
+    <select id="findAll" resultType="girl">
+        select * from girl
+    </select>
+
+    <select id="findById" resultType="girl">
+        select * from girl where id = #{id}
+    </select>
+
+    <select id="findByGirlQuery" resultType="girl">
+        select * from girl
+        <where>
+            <if test="name != null and name !=''">
+                name = #{name}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+            <if test="address != null and address !=''">
+                and address = #{address}
+            </if>
+        </where>
+    </select>
+
+    <insert id="save">
+        insert into girl values (null,#{name},#{age},#{address})
+    </insert>
+
+    <update id="update">
+        update girl
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="age != null and age != ''">
+                age = #{age},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from girl where id = #{id}
+    </delete>
+</mapper>
